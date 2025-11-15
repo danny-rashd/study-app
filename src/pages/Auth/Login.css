@@ -1,0 +1,54 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    padding: 20px;
+}
+
+.login-container ion-card {
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.login-container ion-card-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-container ion-item {
+    margin-bottom: 20px;
+    --padding-top: 20px;
+    --padding-bottom: 10px;
+}
+
+/* Fix floating label spacing */
+.login-container ion-item ion-label {
+    margin-bottom: 8px;
+}
+
+/* Add proper spacing for input */
+.login-container ion-item ion-input {
+    margin-top: 4px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+}
+
+.login-container ion-button {
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.login-container a {
+    color: var(--ion-color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
