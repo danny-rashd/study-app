@@ -38,7 +38,7 @@ You’ve got two options: online demo or run locally.
 **Option 1: Try Online (if deployed to Vercel)**
 
 1. Open your browser.
-2. Go to the live link: https://your-app.vercel.app
+2. Go to the live link: https://study-app-kappa.vercel.app/
 3. Play around! Login with any username/password and explore the tabs.
 
 ⸻
