@@ -11,7 +11,9 @@
     /* Change to your preferred colors */
     --ion-color-secondary: #0cd1e8;
     --ion-color-tertiary: #7044ff;
+
 }
+
 ```
 
 ---
