@@ -45,25 +45,25 @@ You’ve got two options: online demo or run locally.
 
 **Option 2: Run Locally**
 
-1. Make sure you have Node.js￼ installed.
+1. Make sure you have Node.js installed.
 2. Clone this repo:
-
+```
 git clone https://github.com/your-username/study-app.git
 cd study-app
-
-	3.	Install dependencies:
-
+```
+3. Install dependencies:
+```
 npm install
-
-	4.	Start the app:
-
+```
+4. Start the app:
+```
 npm run dev
-
-	5.	Open your browser at:
-
+```
+5. Open your browser at:
+```
 http://localhost:5173
-
-	6.	Login with any credentials and explore all the features.
+```
+6. Login with any credentials and explore all the features.
 
 ⸻
 
