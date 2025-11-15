@@ -10,6 +10,7 @@ export default defineConfig({
         react(),
         legacy()
     ],
+    base: './', // ensures correct asset paths
     test: {
         globals: true,
         environment: 'jsdom',
