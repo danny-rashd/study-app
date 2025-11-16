@@ -79,26 +79,32 @@ export const mockTasks: Task[] = [
 export const mockSuggestedNotes: SuggestedNote[] = [
     {
         id: 1,
-        title: 'Cell Biology Fundamentals',
-        subject: 'Biology',
-        description: 'Comprehensive overview of cell structure and functions'
+        title: 'Foundations of Family Enterprise',
+        subject: 'BPMEK 3043 Family Business',
+        description: 'Core principles of family-owned businesses, including governance, succession, and conflict management.'
     },
     {
         id: 2,
-        title: 'Algebra Shortcuts',
-        subject: 'Mathematics',
-        description: 'Quick tips for solving algebraic equations'
+        title: 'Creativity & Innovation Techniques',
+        subject: 'BPMEK 2023 Creativity Innovation',
+        description: 'Practical frameworks and methods to generate ideas, enhance creativity, and drive innovation.'
     },
     {
         id: 3,
-        title: 'World War II Timeline',
-        subject: 'History',
-        description: 'Key events and dates from 1939-1945'
+        title: 'Business Intelligence Essentials',
+        subject: 'BPMNK 2033 Business Intelligence and Data Analytics',
+        description: 'Overview of BI concepts, data analytics workflows, dashboards, and decision-making using data.'
     },
     {
         id: 4,
-        title: 'Chemical Reactions Guide',
-        subject: 'Chemistry',
-        description: 'Common reaction types and examples'
+        title: 'Understanding Industrial Relations',
+        subject: 'BPMHK 3103 Industrial Relations',
+        description: 'Key aspects of labour relations, collective bargaining, trade unions, and dispute resolution.'
+    },
+    {
+        id: 5,
+        title: 'Organizational Behaviour Overview',
+        subject: 'BPMNK 2023 Organizational Behaviour',
+        description: 'Study of human behaviour in organizations, including motivation, leadership, and team dynamics.'
     },
 ];
