@@ -28,7 +28,6 @@ const Login: React.FC = () => {
     const handleLogin = async () => {
         if (email && password) {
             setShowLoading(true);
-
             // Simulate API call
             setTimeout(() => {
                 setShowLoading(false);
@@ -48,20 +47,18 @@ const Login: React.FC = () => {
                     <IonTitle>Study App</IonTitle>
                 </IonToolbar>
             </IonHeader>
-
             <IonContent className="ion-padding">
                 <IonCard>
                     <IonCardHeader>
                         <IonCardTitle>Welcome Back</IonCardTitle>
                     </IonCardHeader>
-
                     <IonCardContent>
                         <IonItem>
                             <IonLabel position="stacked">Email</IonLabel>
                             <IonInput
                                 type="email"
                                 value={email}
-                                onIonChange={(e) => setEmail(e.detail.value!)}
+                                onIonInput={(e) => setEmail(e.detail.value!)}
                                 placeholder="username@email.com"
                             />
                         </IonItem>
@@ -70,21 +67,18 @@ const Login: React.FC = () => {
                             <IonInput
                                 type="password"
                                 value={password}
-                                onIonChange={(e) => setPassword(e.detail.value!)}
+                                onIonInput={(e) => setPassword(e.detail.value!)}
                                 placeholder="Password"
                             />
                         </IonItem>
-
                         <IonButton expand="block" onClick={handleLogin} className="ion-margin-top">
                             Login
                         </IonButton>
-
                         <IonText className="ion-text-center ion-margin-top">
                             Don't have an account? <a href="/signup">Sign up</a>
                         </IonText>
                     </IonCardContent>
                 </IonCard>
-
                 <IonLoading
                     isOpen={showLoading}
                     message={'Logging in...'}
