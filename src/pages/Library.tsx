@@ -1,4 +1,6 @@
 import {
+    IonButton,
+    IonButtons,
     IonCard,
     IonCardHeader,
     IonCardSubtitle,
@@ -11,44 +13,71 @@ import {
     IonIcon,
     IonLabel,
     IonLoading,
+    IonModal,
     IonPage,
     IonSearchbar,
     IonTitle,
     IonToast,
     IonToolbar,
 } from '@ionic/react';
-import {add, documentText} from 'ionicons/icons';
+import {add, close, documentText} from 'ionicons/icons';
 import {useState} from 'react';
-import {mockDocuments} from '../data/mockData';
+import {mockDocuments, pdfFiles} from '../data/mockData';
 
 const Library: React.FC = () => {
     const [documents, setDocuments] = useState(mockDocuments);
     const [searchText, setSearchText] = useState('');
     const [showLoading, setShowLoading] = useState(false);
     const [showToast, setShowToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
+    const [toastColor, setToastColor] = useState<'success' | 'danger'>('success');
     const [filter, setFilter] = useState<'all' | 'pdf' | 'doc' | 'txt'>('all');
+    const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
+    const [showPdfModal, setShowPdfModal] = useState(false);
+    const [currentDocName, setCurrentDocName] = useState<string>('');
 
     const handleFileUpload = () => {
-        // Mock file upload
         setShowLoading(true);
 
         setTimeout(() => {
             const newDoc = {
                 id: documents.length + 1,
-                name: `New_Document_${documents.length + 1}.pdf`,
+                filename: `New_Document_${documents.length + 1}.pdf`,
                 type: 'pdf' as const,
                 date: new Date().toISOString().split('T')[0],
                 size: '1.5 MB',
+                subject: 'General',
             };
 
             setDocuments([newDoc, ...documents]);
             setShowLoading(false);
+            setToastMessage('Document uploaded successfully!');
+            setToastColor('success');
             setShowToast(true);
         }, 2000);
     };
 
+    const handleDocumentClick = (doc: typeof documents[0]) => {
+        const pdfUrl = pdfFiles[doc.filename];
+
+        if (pdfUrl) {
+            // Open PDF in a new tab / native viewer
+            window.open(pdfUrl, "_blank");
+        } else {
+            setToastMessage(`PDF file "${doc.filename}" not found`);
+            setToastColor('danger');
+            setShowToast(true);
+        }
+    };
+
+    const closePdfModal = () => {
+        setShowPdfModal(false);
+        setSelectedPdf(null);
+        setCurrentDocName('');
+    };
+
     const filteredDocs = documents.filter((doc) => {
-        const matchesSearch = doc.name.toLowerCase().includes(searchText.toLowerCase());
+        const matchesSearch = doc.filename.toLowerCase().includes(searchText.toLowerCase());
         const matchesFilter = filter === 'all' || doc.type === filter;
         return matchesSearch && matchesFilter;
     });
@@ -60,6 +89,7 @@ const Library: React.FC = () => {
                     <IonTitle>My Library</IonTitle>
                 </IonToolbar>
             </IonHeader>
+
             <IonContent fullscreen>
                 <IonSearchbar
                     value={searchText}
@@ -95,13 +125,21 @@ const Library: React.FC = () => {
                 </div>
 
                 {filteredDocs.map((doc) => (
-                    <IonCard key={doc.id} button>
+                    <IonCard key={doc.id}>
                         <IonCardHeader>
-                            <IonCardTitle>
-                                <IonIcon icon={documentText}/> {doc.name}
+                            <IonCardTitle
+                                style={{cursor: 'pointer'}} // optional: show pointer
+                                onClick={() => handleDocumentClick(doc)}
+                            >
+                                <IonIcon icon={documentText}/> {doc.filename}
                             </IonCardTitle>
                             <IonCardSubtitle>
                                 {doc.date} • {doc.size}
+                            </IonCardSubtitle>
+                            <IonCardSubtitle>
+                                <IonChip color="primary">
+                                    <IonLabel>{doc.subject}</IonLabel>
+                                </IonChip>
                             </IonCardSubtitle>
                         </IonCardHeader>
                     </IonCard>
@@ -113,18 +151,38 @@ const Library: React.FC = () => {
                     </IonFabButton>
                 </IonFab>
 
-                <IonLoading
-                    isOpen={showLoading}
-                    message={'Uploading document...'}
-                />
+                <IonLoading isOpen={showLoading} message={'Uploading document...'}/>
 
                 <IonToast
                     isOpen={showToast}
                     onDidDismiss={() => setShowToast(false)}
-                    message="Document uploaded successfully!"
+                    message={toastMessage}
                     duration={2000}
-                    color="success"
+                    color={toastColor}
                 />
+
+                {/* Fullscreen PDF Viewer Modal */}
+                <IonModal isOpen={showPdfModal} onDidDismiss={closePdfModal}>
+                    <IonHeader>
+                        <IonToolbar color="primary">
+                            <IonTitle>{currentDocName}</IonTitle>
+                            <IonButtons slot="end">
+                                <IonButton onClick={closePdfModal}>
+                                    <IonIcon icon={close}/>
+                                </IonButton>
+                            </IonButtons>
+                        </IonToolbar>
+                    </IonHeader>
+                    <IonContent>
+                        {selectedPdf && (
+                            <embed
+                                src={selectedPdf}
+                                type="application/pdf"
+                                style={{width: '100%', height: '100%'}}
+                            />
+                        )}
+                    </IonContent>
+                </IonModal>
             </IonContent>
         </IonPage>
     );

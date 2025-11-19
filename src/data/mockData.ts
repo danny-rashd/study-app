@@ -1,9 +1,10 @@
 export interface Document {
     id: number;
-    name: string;
+    filename: string;
     type: 'pdf' | 'doc' | 'txt';
     date: string;
     size: string;
+    subject: string;
 }
 
 export interface Flashcard {
@@ -28,11 +29,57 @@ export interface SuggestedNote {
     description: string;
 }
 
+// PDF files mapping - using public directory paths
+// Files should be located in: public/data/
+export const pdfFiles: Record<string, string> = {
+    'family_business.pdf': '/data/family_business.pdf',
+    'creativity.pdf': '/data/creativity.pdf',
+    'descriptive_analysis.pdf': '/data/descriptive_analysis.pdf',
+    'industrial_relation.pdf': '/data/industrial_relation.pdf',
+    'leadership.pdf': '/data/leadership.pdf',
+};
+
 export const mockDocuments: Document[] = [
-    {id: 1, name: 'Biology_Chapter_3.pdf', type: 'pdf', date: '2025-11-10', size: '2.4 MB'},
-    {id: 2, name: 'Math_Formulas.docx', type: 'doc', date: '2025-11-12', size: '1.2 MB'},
-    {id: 3, name: 'History_Notes.pdf', type: 'pdf', date: '2025-11-13', size: '3.1 MB'},
-    {id: 4, name: 'Chemistry_Lab.txt', type: 'txt', date: '2025-11-14', size: '0.5 MB'},
+    {
+        id: 1,
+        filename: 'family_business.pdf',
+        subject: 'BPMEK 3043 Family Business',
+        type: 'pdf',
+        date: '2025-11-10',
+        size: '2.4 MB'
+    },
+    {
+        id: 2,
+        filename: 'creativity.pdf',
+        subject: 'BPMEK 2023 Creativity Innovation',
+        type: 'pdf',
+        date: '2025-11-12',
+        size: '1.2 MB'
+    },
+    {
+        id: 3,
+        filename: 'descriptive_analysis.pdf',
+        subject: 'BPMNK 2033 Business Intelligence and Data Analytics',
+        type: 'pdf',
+        date: '2025-11-13',
+        size: '3.1 MB'
+    },
+    {
+        id: 4,
+        filename: 'industrial_relation.pdf',
+        subject: 'BPMHK 3103 Industrial Relations',
+        type: 'pdf',
+        date: '2025-11-14',
+        size: '0.5 MB'
+    },
+    {
+        id: 5,
+        filename: 'leadership.pdf',
+        subject: 'BPMNK 2023 Organizational Behaviour',
+        type: 'pdf',
+        date: '2025-11-14',
+        size: '0.5 MB'
+    },
 ];
 
 export const mockFlashcards: Flashcard[] = [
@@ -40,40 +87,46 @@ export const mockFlashcards: Flashcard[] = [
         id: 1,
         front: 'What is Photosynthesis?',
         back: 'The process by which green plants use sunlight to synthesize nutrients from carbon dioxide and water.',
-        subject: 'Biology'
+        subject: 'BPMEK 3043 Family Business'
     },
     {
         id: 2,
         front: 'What is the Pythagorean Theorem?',
         back: 'a² + b² = c², where c is the hypotenuse of a right triangle.',
-        subject: 'Mathematics'
+        subject: 'BPMEK 2023 Creativity Innovation'
     },
     {
         id: 3,
         front: 'When did World War II end?',
         back: 'September 2, 1945',
-        subject: 'History'
+        subject: 'BPMNK 2033 Business Intelligence and Data Analytics'
     },
     {
         id: 4,
         front: 'What is the chemical formula for water?',
         back: 'H₂O - Two hydrogen atoms bonded to one oxygen atom',
-        subject: 'Chemistry'
+        subject: 'BPMHK 3103 Industrial Relations'
     },
     {
         id: 5,
         front: 'Define Mitosis',
         back: 'A type of cell division that results in two daughter cells with the same number of chromosomes as the parent.',
-        subject: 'Biology'
+        subject: 'BPMNK 2023 Organizational Behaviour'
     },
 ];
 
 export const mockTasks: Task[] = [
-    {id: 1, title: 'Review Biology Chapter 3', due: '2025-11-16', completed: false, priority: 'high'},
-    {id: 2, title: 'Complete Math Problem Set', due: '2025-11-17', completed: false, priority: 'high'},
-    {id: 3, title: 'History Essay Draft', due: '2025-11-20', completed: true, priority: 'medium'},
-    {id: 4, title: 'Chemistry Lab Report', due: '2025-11-18', completed: false, priority: 'medium'},
-    {id: 5, title: 'Study for Physics Quiz', due: '2025-11-19', completed: false, priority: 'low'},
+    {id: 1, title: 'BPMEK 3043 Family Business', due: '2025-11-16', completed: false, priority: 'high'},
+    {id: 2, title: 'BPMEK 2023 Creativity Innovation', due: '2025-11-17', completed: false, priority: 'high'},
+    {
+        id: 3,
+        title: 'BPMNK 2033 Business Intelligence and Data Analytics',
+        due: '2025-11-20',
+        completed: false,
+        priority: 'medium'
+    },
+    {id: 4, title: 'BPMHK 3103 Industrial Relations', due: '2025-11-18', completed: false, priority: 'medium'},
+    {id: 5, title: 'BPMNK 2023 Organizational Behaviour', due: '2025-11-19', completed: false, priority: 'low'},
 ];
 
 export const mockSuggestedNotes: SuggestedNote[] = [
